@@ -103,6 +103,7 @@ while niveau_vie > 0:
       print(
           "L’usager peut combattre ou éviter chaque adversaire, dans le cas de l’évitement, il y a une pénalité de 1 point de vie."
       )
+      pass
 
     elif choix == '4':
       print("Merci et au revoir...")
