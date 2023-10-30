@@ -13,17 +13,20 @@ nombre_victoires = 0
 nombre_defaites = 0
 nombre_victoires_consecutives = 0
 nombre_combat = 0
+force_adversaire = r(1, 7)
 combat_statut = "Il n'avait pas de dernier combat"
 IsBoss = False
 T = 0.5  #delay
 
+# la boucle qui fait jouer le jeux a l'infinie juusqu'a ce que la joueur veux plus.
 while niveau_vie > 0:
   if IsBoss == False:
-    force_adversaire = r(1, 7)
+    if (combat_statut != "Il n'avait pas de dernier combat" and (choix == '1' or choix == '2')):
+        force_adversaire = r(1, 7)
     print("\nVous tombez face à face avec un adversaire de difficulté :",
           force_adversaire)
 
-    # Menu du jeu
+    # je donne 4 option au joueur(combattre les enemies, contourner les enemies, montrer les regles et quitter le jeux)
     print("Que voulez-vous faire?")
     s(T)
     print("  1- Combattre cet adversaire")
@@ -36,8 +39,8 @@ while niveau_vie > 0:
     s(T)
     choix = input("Entrez votre choix (1/2/3/4): ")
 
+    # le joueur lance le dé, le joueur voit le numero et le niveau de l'adversaire, aussi, son niveau de vie, numero de combat et le status du dernier combat
     if choix == '1':
-      # Lancer le dé pour le combat
       score_de = lancer_de()
 
       nombre_combat += 1
@@ -56,6 +59,8 @@ while niveau_vie > 0:
       print("Dernier combat :", combat_statut)
       s(T)
 
+      # si le dé est plus fort que l'enemie le joueur a gagne le combat et il voit son nombre de vie et nombre de victoires consécutives
+      # il perd le meme nombre de vie que le nombre de vie que son enemie, il a une victoire consecutive de plus et une victoire de plus
       if score_de > force_adversaire:
         print("Vous avez remporté le combat!")
         niveau_vie += force_adversaire
@@ -68,6 +73,8 @@ while niveau_vie > 0:
         print("Nombre de victoires consécutives :",
               nombre_victoires_consecutives)
         s(T)
+      # si l'enemie est plus fort que le dé le joueur perd
+      # il perd le meme nombre de vie que le nombre de vie que son enemie, il a 0 victoire consecutive et defaite de plus
       else:
         print("Vous avez perdu le combat!")
         niveau_vie -= force_adversaire
@@ -77,14 +84,14 @@ while niveau_vie > 0:
         s(T)
         print("Niveau de vie:", niveau_vie)
         s(T)
-
+    # le joueur va voir une autre porte avec un autre enemie il voit son nombre de vie car il perd une vie
     elif choix == '2':
       niveau_vie -= 1
       print("\nVous contournez l'adversaire et allez ouvrir une autre porte.")
       s(T)
       print("Niveau de vie de l’usager :", niveau_vie)
       s(T)
-
+    # ca montre les regles du jeux
     elif choix == '3':
       print("Règles du jeu:")
       s(T)
@@ -103,14 +110,15 @@ while niveau_vie > 0:
       print(
           "L’usager peut combattre ou éviter chaque adversaire, dans le cas de l’évitement, il y a une pénalité de 1 point de vie."
       )
-      pass
+
 
     elif choix == '4':
       print("Merci et au revoir...")
       s(T)
       break
 
-    if nombre_victoires_consecutives % 3 == 0:
+    # si il a un nombre de victoirs consecutive divisible pars 3 il combat le boss avec un niveau plus elever que les enemies
+    if  nombre_victoires_consecutives != 0 and nombre_victoires_consecutives % 3 == 0:
       print("Vous avez atteint", nombre_victoires_consecutives,
             "victoires consécutives! Vous affrontez maintenant le boss!")
       s(T)
@@ -119,12 +127,12 @@ while niveau_vie > 0:
       print("Boss de difficulté :", force_adversaire)
       s(T)
 
-  # if boss == True
+  # si il combat le monstre il a tout un nouveau menu
   else:
     print("\nVous tombez face à face avec un adversaire de difficulté :",
           force_adversaire)
 
-    # Menu du jeu
+    #je donne 3 option au joueur(combattre les enemies, montrer les regles et quitter le jeux)
     print("Que voulez-vous faire?")
     s(T)
     print("  1- Combattre cet adversaire")
@@ -135,8 +143,9 @@ while niveau_vie > 0:
     s(T)
     choix = input("Entrez votre choix (1/2/3): ")
 
+    # le joueur lance le dé, le joueur voit le numero et le niveau de l'adversaire, aussi, son niveau de vie, numero de combat et le status du dernier combat
     if choix == '1':
-      # Lancer le dé pour le combat
+
       score_de = lancer_de()
 
       nombre_combat += 1
@@ -154,7 +163,7 @@ while niveau_vie > 0:
       s(T)
       print("Dernier combat :", combat_statut)
       s(T)
-
+      # si le dé est plus fort que le boss le joueur a gagne le combat et il voit son nombre de vie et nombre de victoires consécutives
       if score_de > force_adversaire:
         print("Vous avez remporté le combat!")
         niveau_vie += force_adversaire
@@ -168,6 +177,7 @@ while niveau_vie > 0:
         print("Nombre de victoires consécutives :",
               nombre_victoires_consecutives)
         s(T)
+      # si le boss est plus fort que le dé le joueur perd
       else:
         print("Vous avez perdu le combat!")
         niveau_vie -= force_adversaire
@@ -197,6 +207,7 @@ while niveau_vie > 0:
       print(
           "L’usager peut combattre ou éviter chaque adversaire, dans le cas de l’évitement, il y a une pénalité de 1 point de vie."
       )
+      pass
 
     elif choix == '3':
       print("Merci et au revoir...")
