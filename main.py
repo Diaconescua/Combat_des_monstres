@@ -26,7 +26,7 @@ while niveau_vie > 0:
       adversaire = 'adversaire'
   else:
     adversaire = 'boss'
-  print("\nVous tombez face à face avec un adversaire de difficulté :",
+  print("\nVous tombez face à face avec un ",adversaire," de difficulté :",
         force_adversaire)
 
   # je donne 4 option au joueur(combattre les enemies, contourner les enemies, montrer les regles et quitter le jeux)
