@@ -9,7 +9,6 @@ def lancer_de():
 
 # Initialisation des variables
 niveau_vie = 20
-adversaire = 'adversaire'
 nombre_victoires = 0
 nombre_defaites = 0
 nombre_victoires_consecutives = 0
@@ -23,11 +22,12 @@ T = 0.5  #delay
 while niveau_vie > 0:
   if (IsBoss == False and combat_statut != "Il n'avait pas de dernier combat" and (choix == '1' or choix == '2')):
       force_adversaire = r(1, 7)
-      adversaire = 'adversaire'
-  else:
-    adversaire = 'boss'
-  print("\nVous tombez face à face avec un ",adversaire," de difficulté :",
+      print("\nVous tombez face à face avec un adversaire de difficulté :",
         force_adversaire)
+  else:
+        print("\nVous tombez face à face avec un boss de difficulté :",
+        force_adversaire)
+  
 
   # je donne 4 option au joueur(combattre les enemies, contourner les enemies, montrer les regles et quitter le jeux)
   print("Que voulez-vous faire?")
@@ -122,7 +122,7 @@ while niveau_vie > 0:
   elif choix == '4':
     print("Merci et au revoir...")
     s(T)
-    break
+    niveau_vie = 0
 
   # si il a un nombre de victoirs consecutive divisible pars 3 il combat le boss avec un niveau plus elever que les enemies
   if  IsBoss == False and nombre_victoires_consecutives != 0 and nombre_victoires_consecutives % 3 == 0:
